@@ -21,6 +21,16 @@ public class CabInvoiceServiceTest {
         double fare = cabInvoiceService.calculateFare( distance, time );
         Assert.assertEquals( 5.0, fare, 0.0 );
     }
-
+    @Test
+    public void givenMultipleRides_ShouldReturnFare() {
+        CabInvoiceService cabInvoiceService = new CabInvoiceService();
+        Ride[] rides ={
+                new Ride( 2.0, 5 ),
+                new Ride(3.0,5),
+                new Ride(4.0,5)
+        };
+        double fare =cabInvoiceService.calculateFare(rides);
+        Assert.assertEquals( 105.0, fare, 0.0 );
+    }
 }
 
