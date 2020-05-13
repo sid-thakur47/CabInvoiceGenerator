@@ -4,10 +4,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class CabInvoiceServiceTest {
+    CabInvoiceService cabInvoiceService = new CabInvoiceService();
 
     @Test
     public void givenDistanceANdTime_ShouldReturnFare() {
-        CabInvoiceService cabInvoiceService = new CabInvoiceService();
+
         double distance = 2.0;
         int time = 5;
         double fare = cabInvoiceService.calculateFare( distance, time );
@@ -15,7 +16,6 @@ public class CabInvoiceServiceTest {
     }
     @Test
     public void givenLessDistanceOrTime_ShouldReturnMinimumFare() {
-        CabInvoiceService cabInvoiceService = new CabInvoiceService();
         double distance = 0.1;
         int time = 1;
         double fare = cabInvoiceService.calculateFare( distance, time );
@@ -23,14 +23,13 @@ public class CabInvoiceServiceTest {
     }
     @Test
     public void givenMultipleRides_ShouldReturnFare() {
-        CabInvoiceService cabInvoiceService = new CabInvoiceService();
-        Ride[] rides ={
+        Ride[] rides = {
+                new Ride( 0.1, 1 ),
                 new Ride( 2.0, 5 ),
-                new Ride(3.0,5),
-                new Ride(4.0,5)
+                new Ride( 3.0, 5 )
         };
-        double fare =cabInvoiceService.calculateFare(rides);
-        Assert.assertEquals( 105.0, fare, 0.0 );
+        EnhancedInvoice enhancedInvoice = cabInvoiceService.calculateFare( rides );
+        EnhancedInvoice invoice = new EnhancedInvoice( 3, 65.0 );
+        Assert.assertEquals( invoice, enhancedInvoice );
     }
 }
-
