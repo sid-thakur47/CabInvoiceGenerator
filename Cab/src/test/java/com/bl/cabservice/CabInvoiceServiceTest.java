@@ -32,4 +32,18 @@ public class CabInvoiceServiceTest {
         EnhancedInvoice invoice = new EnhancedInvoice( 3, 65.0 );
         Assert.assertEquals( invoice, enhancedInvoice );
     }
+
+    @Test
+    public void givenMultipleRidesFromRepository_ShouldReturnFare() {
+        String userId="sid";
+        Ride[] rides = {
+                new Ride( 0.1, 1 ),
+                new Ride( 2.0, 5 ),
+                new Ride( 3.0, 5 )
+        };
+        cabInvoiceService.addRidesToRepository( userId,rides );
+        EnhancedInvoice enhancedInvoice = cabInvoiceService.getInVoiceSummary( userId );
+        EnhancedInvoice invoice = new EnhancedInvoice( 3, 65.0 );
+        Assert.assertEquals( invoice, enhancedInvoice );
+    }
 }
