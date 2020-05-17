@@ -1,4 +1,6 @@
-package com.bl.cabservice;
+package com.bl.cabservice.repository;
+
+import com.bl.cabservice.Ride;
 
 import java.util.*;
 
